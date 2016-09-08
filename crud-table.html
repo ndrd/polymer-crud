@@ -72,10 +72,9 @@ Example:
       }
       paper-toolbar.white {
         --paper-toolbar-color: var(--google-grey-700);
-        --paper-toolbar-background: white;
+        --paper-toolbar-background: transparent;
         --paper-toolbar-title: {
-          font-style: italic;
-          font-weight: bold;
+          font-weight: 400;
         };
       }
       paper-input {
@@ -217,12 +216,11 @@ Example:
           },
           data: {
             type: Array,
-            notify: true
+            notify: true,
+            reflecToAttribute: true,
+            observer: 'fetchData'
           }
         },
-        observers: [
-          'fetchData(data)'
-        ],
 
         ready :  function () {
           this.columns = this.getColumnsName();
@@ -402,6 +400,7 @@ Example:
         },
         /* fetch the data from the api */
         fetchData : function (data) {
+          console.log('data', data);
           this.backgroundData = data;
           this.pages = this.getPagination();
 
